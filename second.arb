@@ -1,0 +1,51 @@
+class Solution 
+    def knight_moves((a, b), (x, y))
+
+        steps = [[2, -1], [1, -2], [-1, -2], [-2, -1], [-1, 2], [1, 2], [2, 1], [-2, 1]]
+        seen = []
+
+        q = [[0, [a, b]]]
+
+        while !(q.empty?) do
+        # 2.times do
+            # p q  
+            moves, coords = q.shift
+            p "MOVES AND COORDS"
+            p moves
+            p coords
+            # p x
+            # p y
+            if coords[0] == x && coords[1] == y
+                p "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                return moves
+            end
+            for s in steps do 
+                p q
+                nxtc = [coords[0] + s[0], coords[1] + s[1]]
+                p "nxtc"
+                p nxtc
+                # p "nxtc = [coords[0] + s[0], coords[1] + s[1]"
+                # p nxtc
+                # p "seen"
+                # p seen
+                if !(seen.include?(nxtc.to_s))
+                    to_append = [moves + 1, nxtc] 
+                    #if I put another bracket around nxtc, it just injects [nxtc] inside without appending it to the last element in q
+                    #if I don't put another bracket aroudn nxtc, it falls into an infinite loop/
+                    p "to_append"
+                    p to_append
+                    q.append(to_append) if nxtc[0].abs < 9 && nxtc[1].abs < 9
+                    seen.append(nxtc.to_s)
+                end
+            end
+        end
+    end
+
+end
+
+foo = Solution.new
+x = foo.knight_moves([1,1],[8,8])
+p "X"
+p x
+#maybe it's because it's not popping in time? Since you only pop once while potentially adding 8 more to the queue(q)?
+#trace the output by incrementally adding the integer in 2.times do at the very first block.

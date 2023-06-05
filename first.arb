@@ -1,0 +1,56 @@
+class Node
+    attr_accessor :data, :node1, :node2, :node3, :node4, :node5, :node6, :node7, :node8
+
+    def initialize(x, y)
+        @data = [x, y]
+        @node1 = Node.new([x + 1, y + 2]) if x + 1 < 9 && y + 2 < 9
+        @node2 = [x + 2, y + 1] if x + 2 < 9 && y + 1 < 9
+        @node3 = [x + 2, y - 1] if x + 2 < 9 && y - 2 < 9
+        @node4 = [x + 1, y - 2] if x + 1 < 9 && y - 2 < 9
+        @node5 = [x - 1, y - 2] if x - 1 < 9 && y - 2 < 9
+        @node6 = [x - 2, y - 1] if x - 2 < 9 && y - 1 < 9
+        @node7 = [x - 2, y + 1] if x - 2 < 9 && y + 1 < 9
+        @node8 = [x - 1, y + 2] if x - 1 < 9 && y + 2 < 9
+    end
+end
+
+class Tree
+    attr_accessor :original, :array, :root
+
+    def initialize(x, y)
+        @root = [x, y]
+        build_tree(x, y)
+    end
+
+    def build_tree(x, y)
+        return nil if #preorder, inorder, or postorder? to scramble for a single path?
+        root = Node.new(x, y)
+        root.node1 = Tree.new(root.node1)
+        root.node2 = Tree.new(root.node2)
+        root.node3 = Tree.new(root.node3)
+        root.node4 = Tree.new(root.node4)
+        root.node5 = Tree.new(root.node5)
+        root.node6 = Tree.new(root.node6)
+        root.node7 = Tree.new(root.node7)
+        root.node8 = Tree.new(root.node8)
+    end
+
+
+end
+
+x = Tree.new(8,3)
+p x.root
+p x.node1
+p x.node2
+p x.node3
+p x.node4
+p x.node5
+p x.node6
+p x.node7
+p x.node8
+
+
+#search up link geeks for geeks -- number of children of given node in n-ary tree.
+#In the above link, break down the input prompt so that it could automatically append additional nodes and thus the subtrees.
+#For Find method -- https://www.geeksforgeeks.org/path-from-the-root-node-to-a-given-node-in-an-n-ary-tree/
+
